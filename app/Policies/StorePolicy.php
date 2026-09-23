@@ -21,7 +21,7 @@ class StorePolicy
      */
     public function view(User $user, Store $store): bool
     {
-        return false;
+        return (int) $user->id === (int) $store->user_id;
     }
 
     /**
@@ -37,7 +37,7 @@ class StorePolicy
      */
     public function update(User $user, Store $store): bool
     {
-        return false;
+        return (int) $user->id === (int) $store->user_id;
     }
 
     /**
@@ -45,7 +45,7 @@ class StorePolicy
      */
     public function delete(User $user, Store $store): bool
     {
-        return false;
+        return (int) $user->id === (int) $store->user_id;
     }
 
     /**

@@ -21,7 +21,7 @@ class ProductPolicy
      */
     public function view(User $user, Product $product): bool
     {
-        return false;
+        return $this->owns($user, $product);
     }
 
     /**
@@ -37,7 +37,7 @@ class ProductPolicy
      */
     public function update(User $user, Product $product): bool
     {
-        return false;
+        return $this->owns($user, $product);
     }
 
     /**
@@ -45,7 +45,7 @@ class ProductPolicy
      */
     public function delete(User $user, Product $product): bool
     {
-        return false;
+        return $this->owns($user, $product);
     }
 
     /**
@@ -62,5 +62,10 @@ class ProductPolicy
     public function forceDelete(User $user, Product $product): bool
     {
         return false;
+    }
+
+    private function owns(User $user, Product $product): bool
+    {
+        return (int) $user->id === (int) $product->store->user_id;
     }
 }
